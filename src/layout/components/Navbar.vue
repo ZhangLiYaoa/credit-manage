@@ -13,13 +13,22 @@ import {logout} from '@/api/article'
 export default {
   name: 'Home',
   methods:{
+    //退出时需要清空vuex中的角色信息  在vuex中进行统一管理
     goBack(){
-      logout().then(()=>{
-         removeToken()  //删除token
-      // /sessionStorage.removeItem('token')
-      this.$router.push('/login');
 
-      })
+    //每次退出时都会触发 
+    this.$store.dispatch('LOGOUT').then(res =>{
+        this.$router.push('./login')
+      }
+    )
+
+
+      // logout().then(()=>{
+      //    removeToken()  //删除token
+      // // /sessionStorage.removeItem('token')
+      // this.$router.push('/login');
+
+      // })
      
     }
   }

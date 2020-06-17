@@ -1,42 +1,30 @@
 <template>
     <el-aside width="200px">
         <el-menu router>
-          <el-menu-item index="/home">
-            <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
-          </el-menu-item>
-          <el-menu-item index="/loan-input" >
-            <i class="el-icon-document"></i>
-            <span slot="title">贷款申请</span>
-          </el-menu-item>
-           <el-menu-item index="/applicat-manage" >
-            <i class="el-icon-document"></i>
-            <span slot="title">申请管理</span>
-          </el-menu-item>
-          <!-- 有子级 -->
-          <el-submenu index="/loan-approve">
-            <template slot="title">贷款审批</template>
-            <el-menu-item index="/loan-approve/first">初审</el-menu-item>
-            <el-menu-item index="/loan-approve/end">终审</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="/subject-manage" >
-            <i class="el-icon-document"></i>
-            <span slot="title">标的管理</span>
-          </el-menu-item>
-           <el-menu-item index="/jurisdiction-manage" >
-            <i class="el-icon-document"></i>
-            <span slot="title">权限管理</span>
-          </el-menu-item>
+         <SidebarItem 
+         v-for="route in get_routers[0].children" 
+         :key="route.path"
+         :item="route"
+         :base-path="route.path"
+         />
         </el-menu>
     </el-aside>
 </template>
 
+
 <script>
+import {mapGetters} from 'vuex' 
+import SidebarItem from './SidebarItem'
 
 export default {
-  name: 'Home',
   methods:{
 
+  },
+  computed:{
+    ...mapGetters(['get_routers'])
+  },
+  components:{
+    SidebarItem
   }
 }
 </script>
